@@ -17,12 +17,10 @@ const Home = () => {
   const deleteAllTodos = () => {
     setListOfTodos([])
   }
-
-  const deleteTodo = () => {
-    const resultingTodos = listOfTodos.filter( (item) => { item !== kaka})
-    setListOfTodos([resultingTodos])
+  function deleteTodo (itemToDelete) {
+    const newList = listOfTodos.filter( (item) => {item !== itemToDelete})
+    console.log(newList)
   }
-
 
 	return (
 		<>
@@ -30,12 +28,9 @@ const Home = () => {
     <InputTodo todoToAdd={(e) => {setTodo(e.target.value)}} addTodo={addTodo}/>
 
     {listOfTodos.map( (item, index) => {return <TodoList theTodo={item} key={index} deleteTodo={deleteTodo} />  } )}
-
-    <button type="button" className="btn btn-outline-secondary m-2" onClick={deleteAllTodos}><i className="bi bi-trash"></i>Delete All Todos</button>
+    <button type="button" className="btn btn-outline-secondary m-2" onClick={deleteAllTodos}>Delete All Todos</button>
     </div>
-		
 		</>
-		
 	);
 };
 
