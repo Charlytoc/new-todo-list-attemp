@@ -1,25 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
+import InputTodo from "./inputTodo.jsx";
+import TodoList from "./todoList.jsx";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
-//create your first component
+
+
 const Home = () => {
+
+  const [todo, setTodo] = useState('')
+  const [listOfTodos, setListOfTodos] = useState([])
+
+  const addTodo = () => {
+    setListOfTodos([...listOfTodos, todo])
+  }
+  
+  const deleteAllTodos = () => {
+    setListOfTodos([])
+  }
+
+  const deleteTodo = () => {
+    const resultingTodos = listOfTodos.filter( (item) => { item !== kaka})
+    setListOfTodos([resultingTodos])
+  }
+
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+		<>
+    <div className="container bg-dark w-50 text-center mt-3">
+    <InputTodo todoToAdd={(e) => {setTodo(e.target.value)}} addTodo={addTodo}/>
+
+    {listOfTodos.map( (item, index) => {return <TodoList theTodo={item} key={index} deleteTodo={deleteTodo} />  } )}
+
+    <button type="button" className="btn btn-outline-secondary m-2" onClick={deleteAllTodos}><i className="bi bi-trash"></i>Delete All Todos</button>
+    </div>
+		
+		</>
+		
 	);
 };
 
