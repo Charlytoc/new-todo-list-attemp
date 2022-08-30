@@ -18,8 +18,10 @@ const Home = () => {
     setListOfTodos([])
   }
   function deleteTodo (itemToDelete) {
-    const newList = listOfTodos.filter( (item) => {item !== itemToDelete})
+    console.log(listOfTodos)
+    const newList = listOfTodos.filter( (item) => {itemToDelete !== item})
     console.log(newList)
+    setListOfTodos(newList)
   }
 
 	return (
@@ -27,7 +29,7 @@ const Home = () => {
     <div className="container bg-dark w-50 text-center mt-3">
     <InputTodo todoToAdd={(e) => {setTodo(e.target.value)}} addTodo={addTodo}/>
 
-    {listOfTodos.map( (item, index) => {return <TodoList theTodo={item} key={index} deleteTodo={deleteTodo} />  } )}
+    {listOfTodos.map( (item, index) => {return <TodoList theTodo={item} key={index} deleteTodo={() => deleteTodo({item})} />  } )}
     <button type="button" className="btn btn-outline-secondary m-2" onClick={deleteAllTodos}>Delete All Todos</button>
     </div>
 		</>
